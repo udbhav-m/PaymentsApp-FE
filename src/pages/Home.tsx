@@ -15,7 +15,12 @@ function Home() {
   const [filter, setFilter] = useState("");
   const debouncedValue = useDebounce(filter);
   const [users, setUsers] = useState<Users[]>([]);
+  const [balance, setBalance] = useState<number>();
   const balanceResponse = useAPI({}, "/account/balance", "get", true, null);
+  useEffect(() => {
+    setBalance(balanceResponse.data?.balance);
+  }, [balanceResponse]);
+
   const { data } = useAPI(
     {},
     `/user/search?filter=${filter}`,
@@ -37,9 +42,7 @@ function Home() {
       <div className="flex flex-col pt-8 px-10 gap-5">
         <h1 className=" font-SS font-semibold">
           Your balance:
-          {balanceResponse.data.balance
-            ? ` ₹${balanceResponse.data?.balance}`
-            : " Getting your balance"}
+          {balance != undefined ? ` ₹${balance}` : " Getting your balance"}
         </h1>
         <SearchBar
           label={"Users"}
@@ -56,7 +59,9 @@ function Home() {
               />
             ))
           ) : (
-            <h1 className="font-semibold text-gray-500">{!filter? "Search for users":"Type a bit more.."}</h1>
+            <h1 className="font-semibold text-gray-500">
+              {!filter ? "Search for users" : "Type a bit more.."}
+            </h1>
           )}
         </div>
       </div>

@@ -88,11 +88,18 @@ function Transfer() {
           <Button label="Send money" onClick={handleOnClick} />
           <div>
             <h1
-              className={`font-semibold ${
-                error ? "text-red-500" : "text-emerald-500"
+              className={`font-semibold  text-red-500 ${error ? "visible" : ""}
               }`}
             >
-              {error ? error : message}
+              {error}
+            </h1>
+            <h1
+              className={`font-semibold   text-emerald-500 ${
+                message ? "visible" : ""
+              }
+              }`}
+            >
+              {message}
             </h1>
           </div>
         </div>
