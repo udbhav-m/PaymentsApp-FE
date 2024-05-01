@@ -48,7 +48,7 @@ function Home() {
           label={"Users"}
           onChange={(e: any) => setFilter(e.target.value)}
         />
-        <div className="divide-y-2 text-center pt-3">
+
           {users && users.length > 0 ? (
             users.map((user: Users) => (
               <Usercard
@@ -63,7 +63,7 @@ function Home() {
               {!filter ? "Search for users" : "Type a bit more.."}
             </h1>
           )}
-        </div>
+
       </div>
     </>
   );
