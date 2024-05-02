@@ -13,7 +13,6 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
   const [error, setError] = useState("");
-  console.log(error);
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const loading = useRedirect(navigate, token);
@@ -68,7 +67,7 @@ function SignUp() {
           label={"Already have an account?"}
           to={"Sign-in"}
         />
-        {/* <h1 className="text-red-500 text-sm font-semibold">{error}</h1> */}
+        <h1 className="text-red-500 text-sm font-semibold">{error}</h1>
       </div>
     </div>
   );

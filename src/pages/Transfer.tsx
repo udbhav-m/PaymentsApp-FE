@@ -86,7 +86,7 @@ function Transfer() {
             onChange={(e) => setAmount(parseInt(e.target.value))}
           />
           <Button label="Send money" onClick={handleOnClick} />
-          {/* <div>
+          <div>
             <h1
               className={`font-semibold  text-red-500 ${error ? "visible" : ""}
               }`}
@@ -101,7 +101,7 @@ function Transfer() {
             >
               {message}
             </h1>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>

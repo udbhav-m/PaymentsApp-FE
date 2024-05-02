@@ -11,7 +11,6 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
   const [error, setError] = useState("");
-  console.log(error);
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
@@ -52,7 +51,7 @@ function Login() {
           label={"Don't have an account?"}
           to={"Sign-up"}
         />
-        {/* <h1 className="text-red-500 text-sm font-semibold">{error}</h1> */}
+        <h1 className="text-red-500 text-sm font-semibold">{error}</h1>
       </div>
     </div>
   );
