@@ -11,6 +11,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
   const [error, setError] = useState("");
+  console.log(error);
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
