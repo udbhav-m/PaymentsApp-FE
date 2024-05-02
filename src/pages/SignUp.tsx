@@ -67,7 +67,7 @@ function SignUp() {
           label={"Already have an account?"}
           to={"Sign-in"}
         />
-        <h1 className="text-red-500 text-sm font-semibold">{error}</h1>
+        {/* <h1 className="text-red-500 text-sm font-semibold">{error}</h1> */}
       </div>
     </div>
   );

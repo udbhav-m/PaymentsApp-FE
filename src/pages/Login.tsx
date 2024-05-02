@@ -51,7 +51,7 @@ function Login() {
           label={"Don't have an account?"}
           to={"Sign-up"}
         />
-        <h1 className="text-red-500 text-sm font-semibold">{error}</h1>
+        {/* <h1 className="text-red-500 text-sm font-semibold">{error}</h1> */}
       </div>
     </div>
   );
