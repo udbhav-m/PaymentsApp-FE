@@ -2,8 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { NavigateFunction, useLocation } from "react-router-dom";
 
-export const API_V1 =
-  "https://payments-app-api-beryl.vercel.app/api/v1" || process.env.API_V1;
+export const API_V1 = process.env.API_V1;
 
 interface Signup {
   firstName?: string;
