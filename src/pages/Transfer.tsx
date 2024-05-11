@@ -7,6 +7,7 @@ import Appbar from "../components/Appbar";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 
+
 function Transfer() {
   const [amount, setAmount] = useState<number>(0);
   const [message, setMessage] = useState("");
@@ -68,7 +69,7 @@ function Transfer() {
   }, [message, error]);
 
   return (
-    <div className={`${loading ? "cursor-wait" : ""}`}>
+    <div className={`${loading ? "hover:cursor-wait" : ""}`}>
       <Appbar label="Home" to="/home" />
       <div className={`flex justify-center mt-28 `}>
         <div className="w-96 border p-10 h-96 flex flex-col gap-6 text-center">
@@ -84,6 +85,7 @@ function Transfer() {
             placeholder="Enter Amount"
             type="number"
             onChange={(e) => setAmount(parseInt(e.target.value))}
+            readonly={false}
           />
           <Button label="Send money" onClick={handleOnClick} />
           <div>

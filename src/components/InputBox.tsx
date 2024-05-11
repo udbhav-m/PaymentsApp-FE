@@ -5,11 +5,13 @@ function InputBox({
   onChange,
   type,
   placeholder,
+  readonly,
 }: {
   label: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   type: string;
   placeholder: string;
+  readonly: boolean;
 }) {
   return (
     <div className="text-start space-y-2">
@@ -19,6 +21,7 @@ function InputBox({
         onChange={onChange}
         type={type}
         placeholder={placeholder}
+        readOnly={readonly}
       />
     </div>
   );

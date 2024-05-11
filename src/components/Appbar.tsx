@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAPI, useRedirect } from "../utils/utils";
 import Profile from "./Profile";
 import PageButton from "./PageButton";
+import Loader from "./Loader";
 
 function Appbar({ label, to }: { label: string; to: string }) {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ function Appbar({ label, to }: { label: string; to: string }) {
   return (
     <div>
       {loading ? (
-        <h1>Loading</h1>
+        <Loader />
       ) : (
         <div className="flex items-center justify-between mx-7 my-5 p-2  rounded-lg shadow-md">
           <h1

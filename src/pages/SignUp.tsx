@@ -6,6 +6,7 @@ import Button from "../components/Button";
 import BottomText from "../components/BottomText";
 import { useNavigate } from "react-router-dom";
 import { handleSignUp, useRedirect } from "../utils/utils";
+import Loader from "../components/Loader";
 
 function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -16,7 +17,7 @@ function SignUp() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const loading = useRedirect(navigate, token);
-  if (loading) return <>Loading</>;
+  if (loading) return <Loader />;
   return (
     <div className="bg-slate-200 h-screen flex justify-center items-center">
       <div className=" border bg-white flex flex-col text-center w-fit gap-4 px-8 py-8">
@@ -27,12 +28,14 @@ function SignUp() {
           onChange={(e) => setFirstName(e.target.value)}
           type={"text"}
           placeholder={"Jake"}
+          readonly={false}
         />
         <InputBox
           label="Last Name"
           onChange={(e) => setLastName(e.target.value)}
           type={"text"}
           placeholder={"Peralta"}
+          readonly={false}
         />
         <InputBox
           label="Email"
@@ -41,6 +44,7 @@ function SignUp() {
           }
           type={"text"}
           placeholder={"jakeP@example.com"}
+          readonly={false}
         />
         <InputBox
           label="Password"
@@ -49,6 +53,7 @@ function SignUp() {
           }
           type={"password"}
           placeholder={"Password"}
+          readonly={false}
         />
         <Button
           onClick={() => {

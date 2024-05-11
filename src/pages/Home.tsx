@@ -3,6 +3,7 @@ import Appbar from "../components/Appbar";
 import SearchBar from "../components/SearchBar";
 import Usercard from "../components/Usercard";
 import { useAPI, useDebounce } from "../utils/utils";
+import Loader from "../components/Loader";
 
 export interface Users {
   UID: string;
@@ -36,6 +37,8 @@ function Home() {
     }
   }, [debouncedValue]);
 
+  if (balanceResponse?.isLoading) return <Loader />;
+
   return (
     <>
       <Appbar label="" to="" />
@@ -49,21 +52,20 @@ function Home() {
           onChange={(e: any) => setFilter(e.target.value)}
         />
 
-          {users && users.length > 0 ? (
-            users.map((user: Users) => (
-              <Usercard
-                key={user.UID}
-                firstName={user.firstName}
-                lastName={user.lastName}
-                to={user.UID}
-              />
-            ))
-          ) : (
-            <h1 className="font-semibold text-gray-500">
-              {!filter ? "Search for users" : "Type a bit more.."}
-            </h1>
-          )}
-
+        {users && users.length > 0 ? (
+          users.map((user: Users) => (
+            <Usercard
+              key={user.UID}
+              firstName={user.firstName}
+              lastName={user.lastName}
+              to={user.UID}
+            />
+          ))
+        ) : (
+          <h1 className="font-semibold text-gray-500">
+            {!filter ? "Search for users" : "Type a bit more.."}
+          </h1>
+        )}
       </div>
     </>
   );

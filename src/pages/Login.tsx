@@ -6,6 +6,7 @@ import Button from "../components/Button";
 import BottomText from "../components/BottomText";
 import { useNavigate } from "react-router-dom";
 import { handleLogin, useRedirect } from "../utils/utils";
+import Loader from "../components/Loader";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -15,7 +16,7 @@ function Login() {
 
   const token = localStorage.getItem("token");
   const loading = useRedirect(navigate, token);
-  if (loading) return <>Loading</>;
+  if (loading) return <Loader />;
 
   return (
     <div className="bg-slate-200 h-screen flex justify-center items-center">
@@ -29,6 +30,7 @@ function Login() {
           }
           type={"text"}
           placeholder={"jakeP@example.com"}
+          readonly={false}
         />
         <InputBox
           label="Password"
@@ -37,6 +39,7 @@ function Login() {
           }
           type={"password"}
           placeholder={"Password"}
+          readonly={false}
         />
         <Button
           onClick={() => {

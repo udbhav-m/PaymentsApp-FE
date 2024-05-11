@@ -24,7 +24,10 @@ function Profile({ firstName }: ProfileProps) {
           hide ? "hidden ease-in" : "  visible ease-in"
         }`}
       >
-        <button className="transition-all duration-200 hover:bg-slate-200   w-full rounded-sm py-2  font-semibold">
+        <button
+          onClick={() => navigate("/profile")}
+          className="transition-all duration-200 hover:bg-slate-200   w-full rounded-sm py-2  font-semibold"
+        >
           Profile
         </button>
         <button
