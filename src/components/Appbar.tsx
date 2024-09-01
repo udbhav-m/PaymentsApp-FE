@@ -21,7 +21,7 @@ function Appbar({ label, to }: { label: string; to: string }) {
             className="flex  items-center gap-2 cursor-pointer"
             onClick={() => navigate("/home")}
           >
-            <img src="/public/paytmImg.png" alt="img" className="h-12" />
+            <img src="https://ucarecdn.com/cbd3a20f-3e2e-4fd5-b2ef-8eb89df55114/paytmImg.png" alt="img" className="h-12" />
             <h1 className="sans  text-xl font-semibold select-none">
               PayTM App
             </h1>
