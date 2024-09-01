@@ -13,6 +13,11 @@ interface Signup {
   pin: Number;
 }
 
+interface Login {
+  email: string;
+  password: string;
+}
+
 interface Body {
   firstName?: string;
   lastName?: string;
@@ -105,7 +110,7 @@ export const handleSignUp = async (
 };
 
 export const handleLogin = async (
-  { email, password }: Signup,
+  { email, password }: Login,
   setError: React.Dispatch<React.SetStateAction<string>>,
   navigate: NavigateFunction
 ) => {
