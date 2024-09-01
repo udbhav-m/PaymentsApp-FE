@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import InputBox from "../components/InputBox";
 import ProfileIcon from "../components/ProfileIcon";
 import { API_V1 } from "../utils/utils";
@@ -6,16 +6,18 @@ import Button from "../components/Button";
 import Appbar from "../components/Appbar";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-
+import Pin from "../components/Pin";
 
 function Transfer() {
   const [amount, setAmount] = useState<number>(0);
+  const [pin, setPin] = useState<number>(0);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [toId, setTo] = useState("");
   const [loading, setLoading] = useState(false);
+  const [prompt, setPrompt] = useState(false);
 
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -38,7 +40,7 @@ function Transfer() {
 
       const response = await axios.post(
         API_V1 + "/account/transfer",
-        { toId, amount },
+        { toId, amount, pin },
         {
           headers: {
             token: token,
@@ -51,28 +53,53 @@ function Transfer() {
       if (response.data.error) {
         setError(error);
       } else {
+        setError("");
         setMessage(response.data.success);
       }
     } catch (error: any) {
       setLoading(false);
       setError(error.response.data.error);
+      setMessage("");
     }
+  };
+
+  const promptPin = () => {
+    if (amount && amount > 0) setPrompt(true);
   };
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setError("");
       setMessage("");
-    }, 10000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, [message, error]);
 
   return (
-    <div className={`${loading ? "hover:cursor-wait" : ""}`}>
+    <div className={`${loading ? "hover:cursor-wait" : ""} relative`}>
+      {prompt ? (
+        <div className="fixed inset-0 bg-black h-screen w-full bg-opacity-45 flex justify-center items-center">
+          <Pin
+            handleOnChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setPin(+e.target.value)
+            }
+            handleOnclick={() => {
+              setPrompt(false);
+              handleOnClick();
+            }}
+            onCancel={() => {
+              setPrompt(false);
+              setAmount(0);
+            }}
+          />
+        </div>
+      ) : (
+        ""
+      )}
       <Appbar label="Home" to="/home" />
-      <div className={`flex justify-center mt-28 `}>
-        <div className="w-96 border p-10 h-96 flex flex-col gap-6 text-center">
+      <div className={`flex justify-center mt-28 z-0 `}>
+        <div className="w-96 rounded shadow-2xl p-10 h-96 flex flex-col gap-6 text-center">
           <h1 className="font-SS text-xl font-semibold">Transfer Money</h1>
           <div className="flex items-center gap-6">
             <ProfileIcon firstName={firstName || "?"} />
@@ -87,7 +114,7 @@ function Transfer() {
             onChange={(e) => setAmount(parseInt(e.target.value))}
             readonly={false}
           />
-          <Button label="Send money" onClick={handleOnClick} />
+          <Button label="Send money" onClick={promptPin} />
           <div>
             <h1
               className={`font-semibold  text-red-500 ${error ? "visible" : ""}

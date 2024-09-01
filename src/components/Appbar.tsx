@@ -17,12 +17,15 @@ function Appbar({ label, to }: { label: string; to: string }) {
         <Loader />
       ) : (
         <div className="flex items-center justify-between mx-7 my-5 p-2  rounded-lg shadow-md">
-          <h1
+          <div
+            className="flex  items-center gap-2 cursor-pointer"
             onClick={() => navigate("/home")}
-            className="sans  text-xl font-semibold select-none"
           >
-            PayTM App
-          </h1>
+            <img src="/public/paytmImg.png" alt="img" className="h-12" />
+            <h1 className="sans  text-xl font-semibold select-none">
+              PayTM App
+            </h1>
+          </div>
           {data ? (
             <div className="flex items-center gap-4">
               <h1
@@ -30,7 +33,11 @@ function Appbar({ label, to }: { label: string; to: string }) {
                   location.pathname === "/home" ? "visible" : "hidden"
                 }`}
               >
-                Hello, {data?.firstName}
+                Hello,{" "}
+                {data?.firstName
+                  ? data?.firstName.charAt(0).toUpperCase() +
+                    data?.firstName.slice(1).toLowerCase()
+                  : "Mr..?"}
               </h1>
               <div
                 className={`${

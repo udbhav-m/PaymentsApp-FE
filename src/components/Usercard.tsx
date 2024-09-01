@@ -14,7 +14,7 @@ function Usercard({
   const navigate = useNavigate();
 
   return (
-    <div className="flex justify-between px-4 py-3">
+    <div className="flex justify-between px-4 py-3 shadow-xl rounded-md">
       <div className="w-fit h-fit scale-90 flex items-center gap-x-4">
         <ProfileIcon firstName={firstName} />
         <h1 className="text-lg font-semibold">

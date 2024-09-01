@@ -10,6 +10,7 @@ interface Signup {
   lastName?: string;
   email: string;
   password: string;
+  pin: Number;
 }
 
 interface Body {
@@ -71,7 +72,7 @@ export function useAPI(
 }
 
 export const handleSignUp = async (
-  { firstName, lastName, email, password }: Signup,
+  { firstName, lastName, email, password, pin }: Signup,
   setError: React.Dispatch<React.SetStateAction<string>>,
   navigate: NavigateFunction
 ) => {
@@ -84,6 +85,7 @@ export const handleSignUp = async (
         lastName,
         email,
         password,
+        pin,
       },
       { headers: { "Content-Type": "Application/json" } }
     );

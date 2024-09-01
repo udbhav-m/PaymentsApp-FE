@@ -13,14 +13,15 @@ function SignUp() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
+  const [pin, setpin] = useState(0);
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const loading = useRedirect(navigate, token);
   if (loading) return <Loader />;
   return (
-    <div className="bg-slate-200 h-screen flex justify-center items-center">
-      <div className=" border bg-white flex flex-col text-center w-fit gap-4 px-8 py-8">
+    <div className="bg-slate-200 py-4 flex justify-center items-center">
+      <div className=" border bg-white flex flex-col text-center w-fit gap-4 p-8">
         <Heading label={"Sign Up"} />
         <SubHeading label={"Enter your information to create an account"} />
         <InputBox
@@ -55,10 +56,19 @@ function SignUp() {
           placeholder={"Password"}
           readonly={false}
         />
+        <InputBox
+          label="Pin"
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setpin(+e.target.value)
+          }
+          type={"number"}
+          placeholder={"Set up a 4 digit Pin"}
+          readonly={false}
+        />
         <Button
           onClick={() => {
             handleSignUp(
-              { firstName, lastName, email, password },
+              { firstName, lastName, email, password, pin },
               setError,
               navigate
             );

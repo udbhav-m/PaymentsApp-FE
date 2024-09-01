@@ -11,6 +11,7 @@ interface Update {
   firstName?: string;
   lastName?: string;
   password?: string;
+  pin?: Number;
 }
 
 function Profile() {
@@ -18,6 +19,7 @@ function Profile() {
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [pin, setPin] = useState<Number>();
   const [message, setMessage] = useState<string>("");
   const [error, setError] = useState<string>("");
   const token = localStorage.getItem("token");
@@ -25,10 +27,12 @@ function Profile() {
   if (firstName && firstName.length > 3) payload.firstName = firstName;
   if (lastName && lastName.length > 3) payload.lastName = lastName;
   if (password && password.length > 5) payload.password = password;
+  if (pin && pin.toString().length == 4) payload.password = password;
 
   const handleUpdate = async () => {
     try {
       if (!token) {
+        setMessage("");
         return setError("Invalid user");
       }
       const response = await axios.put(API_V1 + "/user/update", payload, {
@@ -37,12 +41,15 @@ function Profile() {
       console.log(response);
 
       if (response?.data?.success) {
+        setError("");
         setMessage(response?.data?.success);
       }
       if (response?.data?.error) {
+        setMessage("");
         setError(response?.data?.error);
       }
     } catch (error: any) {
+      setMessage("");
       setError(error.message);
     }
   };
@@ -59,7 +66,7 @@ function Profile() {
   if (isLoading) return <Loader />;
   return (
     <>
-      <Appbar label="" to="" />
+      <Appbar label="Home" to="/home" />
       <div className="flex justify-center text-center">
         <div className="flex flex-col gap-3 p-8 mt-2 border w-fit">
           <Heading label="Update details" />
@@ -88,6 +95,13 @@ function Profile() {
             onChange={(e) => setPassword(e.target.value)}
             label="Password"
             placeholder={"Password"}
+            type="password"
+            readonly={false}
+          />
+          <InputBox
+            onChange={(e) => setPin(+e.target.value)}
+            label="Pin (4 digit)"
+            placeholder={"Pin"}
             type="password"
             readonly={false}
           />

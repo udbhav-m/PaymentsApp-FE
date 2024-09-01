@@ -10,6 +10,7 @@ export interface Users {
   firstName: string;
   lastName: string;
   email: string;
+  loggedIn?: boolean;
 }
 
 function Home() {
@@ -48,7 +49,7 @@ function Home() {
           {balance != undefined ? ` ₹${balance}` : " Getting your balance"}
         </h1>
         <SearchBar
-          label={"Users"}
+          label={""}
           onChange={(e: any) => setFilter(e.target.value)}
         />
 
@@ -62,7 +63,7 @@ function Home() {
             />
           ))
         ) : (
-          <h1 className="font-semibold text-gray-500">
+          <h1 className="font-semibold text-gray-500 p-6">
             {!filter ? "Search for users" : "Type a bit more.."}
           </h1>
         )}
